@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="description" content="Accenture Bootcamp - MindHub">
+	<meta name="keywords" content="Hola mundo">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<link rel="shortcut icon" href="../img/Logo Amazing Events.png" type="image/x-icon" />
+
+	<title>Amanzing Event - Buy</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Roboto+Condensed:wght@300;400;700&display=swap"
+		rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/eadeaa3284.js" crossorigin="anonymous"></script>
+
+	<!-- CSS only -->
+	<link rel="stylesheet" href="../css/style.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-page d-flex flex-column justify-content-between viewport" id="body">
+	<header>
+		<nav class="navbar navbar-expand-lg bg-dark">
+			<div class="container-fluid container-lg">
+				<a class="navbar-brand logo" href="../index.html">Amanzing events</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="../index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./upcoming.html">Upcoming Events</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./pastEvent.html">Past Event</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./contact.html">Contact</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="./stast.html">Stats</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- Main -->
+	<main class="flex-auto container-lg container-fluid p-0">
+		<!-- Title -->
+		<h1 class="text-light fs-1 fw-bold text-uppercase text-center p-3 mt-4">Buy Events</h1>
+
+        <form class="row m-2 p-0" id="formulario">
+            <section class="col-12 col-md-6 p-0 m-0 ">
+                <div class="row d-md-flex me-md-2 p-0 m-0">
+					<input type="number" min="1" max="9999999999999999999" id="charterCard" class="m-0 p-0 col-12 py-2 fw-bold fs-md-5 mb-2" placeholder="1232 4321 3512 9820">
+					<select class="col-md-6 my-2" id="changeSelect">
+						<option> --Select-- </option>
+						<option value="visa">Visa</option>
+						<option value="mastercard">MasterCard</option>
+						<option value="express">American Express</option>
+					</select>
+					<select class="col-md-6 my-2 p-md-2" id="changeSelect2">
+						<option> --Select-- </option>
+						<option value="Debit">Debit</option>
+						<option value="Credit">Credit</option>
+					</select>
+					<input type="date" id="thruCard" class="col-md-6 py-1 fs-6 my-2">
+
+					<input type="text" id="nameCard" class="col-md-7 py-1 fs-6 my-2" placeholder="Julian Emanuel Alvarez">
+					<input type="number" id="dniCard" min="1" max="99999999" class="col-md-3 py-1 my-2"placeholder="DNI">
+                    <input type="number" id="cvvCard" min="1" max="999" class="col-md-2 py-1 my-2" placeholder="cvv">
+
+					<div class="col-12 mt-1 p-0 m-0">
+						<input type="checkbox" id="check" name="check">
+						<label for="check">desea guardar la información para futuras compras</label>
+					</div>
+					<div class="d-flex justify-content-start m-0 p-0">
+						<button type="submit" class="effectBuy d-block btn mt-4 btn-success ps-5 pe-4 fw-bold text-uppercase">Buy <i class="ms-2 fa-solid fa-arrow-right"></i></button>
+					</div>
+
+                </div>
+            </section>
+            <section class="col-12 col-md-6 mt-4 mt-md-0 d-none d-md-flex">
+                <div class="card border border-2 border-dark bg-primary px-3 card-hover2 card-style">
+                    <h2 class="fw-bold fs-3 mt-2">Amanzing Events</h2>
+					<p class="fw-semibold fs-3 mt-md-4 changeNumber">2131 2131 2312 7320</p>
+					<div class="d-flex justify-content-start ms-3">
+						<p class="fw-semibold fs-6 me-2 text-uppercase">thru</p>
+						<span class="fw-bold changeDate">02/2024</span>
+					</div>
+					<div class="d-flex justify-content-between align-items-center">
+						<div>
+							<p class="fw-semibold fs-4 m-0 changeName">Julian Emanuel Alvarez</p>
+							<p class="m-0 fw-bold fs-5">001</p>
+						</div>
+						<div class="d-flex justify-content-center algin-items-center flex-column">
+							<p class="changeSelected m-0 text-center"></p>
+							<p class="fw-bold changeSelected2 mt-1 text-center mb-0"></p>
+						</div>
+					</div>
+                </div>
+            </section>
+        </form>
+		<section class="error"></section>
+		<section class="container-card m-2"></section>
+	</main>
+
+
+	<!-- footer -->
+	<footer class="bg-dark py-3">
+		<section class="container-lg container-fluid d-flex justify-content-between align-items-center">
+			<div class="d-flex hover">
+				<a href="" class="nav-link fs-2 me-3"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+				<a href="" class="nav-link fs-2 me-3"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+				<a href="" class="nav-link fs-2"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+			</div>
+			<h2 class="text-light">Cohort</h2>
+		</section>
+	</footer>
+
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+		crossorigin="anonymous"></script>
+
+	<!-- Javascript -->
+	<script type="module" src="../js/buy.js"></script>
+</body>
+
+</html>
