@@ -3,19 +3,22 @@ import { data } from "./data.js";
 document.addEventListener("DOMContentLoaded", inciarApp);
 
 function inciarApp() {
-    // Como primer Instrucción renderiza la cards
+    // Como primer Instrucción renderiza la cards, check
     mostrarHTML(info);
+    dropCategory(info);
+    mostrarCheckbox(reducirCategoria(categoycard));
 
-    // Evento click por cada checkboxes
-    [...checkboxes].map(e => e.addEventListener("click", cheq));
-    document.querySelector("#searchInput").addEventListener("input", search);
+    // Declarando
+    searchType.addEventListener("keyup", filtrarInput);
+    checkbox.addEventListener("change", filtrarInput);
 }
+
 // Query
 const indexCard = document.querySelector('.indexCard');
 const upcomingEvents = document.querySelector('.upcomingEvents');
 const pastEvent = document.querySelector('.pastEvent');
 const checkbox = document.querySelector('#checkbox');
-const checkboxes = document.getElementsByClassName('form-check-input');
+const searchType = document.querySelector("#searchInput");
 
 // Data de los objetos
 const info = data.events;
@@ -72,41 +75,30 @@ const mostrarCheckbox = (data) => {
 }
 
 // Logica de los check para filtrado
-const cheq = () => {
-    const resultado = [...checkboxes].filter(e => {
-        if (e.checked) {
-            return e.value;
-        }
-    });
+const cheq = (info) => {
+    const inputCheck = document.querySelectorAll("input[type='checkbox']");
+    const check = [...inputCheck, inputCheck];
+    const trueCheck = check.filter(inputCheck => inputCheck.checked);
+    const valueCheck = trueCheck.map(check => check.value)
 
-    logicaCheck(resultado);
-}
-
-const logicaCheck = (data) => {
-    let resultado = [];
-
-    if (data.length === 0) {
-        mostrarHTML(info)
-        return;
-    }
+    let filtrados = [];
 
     info.filter(eventos => {
-        data.forEach(value => {
-            if (eventos.category.includes(value.value)) {
-                return resultado.push(eventos)
+        valueCheck.forEach(value => {
+            if (eventos.category.includes(value)) {
+                return filtrados.push(eventos)
             }
-        });
-    });
-
-    mostrarHTML(resultado);
+        })
+    })
+    if (filtrados.length == 0) {
+        return info
+    }
+    return filtrados
 }
 
 // Manejo de input
-const search = (e) => {
-
-    busqueda.busqueda = e.target.value.toLowerCase();
-
-    const chequeado = [...checkboxes].filter(e => e.checked);
+const search = (info) => {
+    busqueda.busqueda = searchType.value.toLowerCase();
 
     const resultado = info.map(element => {
         const { name } = element;
@@ -116,27 +108,15 @@ const search = (e) => {
         return element;
     }).filter(elemetn => elemetn.name.includes(busqueda.busqueda));
 
-    if (chequeado.length === 0) {
-        mostrarHTML(resultado);
+    return resultado;
+}
 
-    } else if (chequeado.length > 0) {
+// Super Filtro
+const filtrarInput = () => {
+    let eventFilter2 = cheq(info)
+    let eventFilter = search(eventFilter2)
 
-        let resultado = [];
-
-        info.filter(eventos => {
-            chequeado.forEach(value => {
-                if (eventos.category.includes(value.value)) {
-                    return resultado.push(eventos)
-                }
-            })
-        });
-
-        const filtrado = resultado.filter(element => element.name.includes(busqueda.busqueda))
-
-        mostrarHTML(filtrado);
-    } else {
-        mostrarHTML(resultado);
-    }
+    mostrarHTML(eventFilter)
 }
 
 // Renderizo la data --> (cards)
@@ -187,7 +167,6 @@ const mostrarHTML = (informacion) => {
             console.log("Error en el javascript")
         }
     })
-
 }
 
 // Limpiar y mensajes de error
@@ -199,7 +178,7 @@ const message = () => {
     divMessage.className = "text-center";
 
     divMessage.innerHTML = `
-        <img class="notFound" src=".${indexCard!==null?"":"."}/img/notFound.svg" alt="not found" />
+        <img class="notFound" src=".${indexCard !== null ? "" : "."}/img/notFound.svg" alt="not found" />
         <p class="text-dark rounded bg-light px-3 py-1 fw-bold fs-3">Not found events</p>
     `;
 
@@ -217,7 +196,3 @@ const message = () => {
 
     }
 }
-
-// Declarando
-dropCategory(info);
-mostrarCheckbox(reducirCategoria(categoycard));
