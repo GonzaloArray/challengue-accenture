@@ -59,7 +59,7 @@ const reducirCategoria = (data) => {
 
     return result;
 }
-
+/* -----------------renderizado------------------- */
 // Renderizado de los checkbox
 const mostrarCheckbox = (data) => {
     const rowCheck = document.createElement('div');
@@ -82,7 +82,7 @@ const mostrarCheckbox = (data) => {
         checkbox.appendChild(rowCheck);
     });
 }
-
+/* -------------------------- Logica ------------------- */
 // Logica de los check para filtrado
 const cheq = (info) => {
     const inputCheck = document.querySelectorAll("input[type='checkbox']");
