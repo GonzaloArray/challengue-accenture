@@ -8,37 +8,31 @@ const root3 = document.querySelector('#root3');
 
 
 let fecha;
-let dataUpcoming = [];
-let dataPast = [];
-let maxUpcoming;
-let minPastEvent;
-let maxPastEvent;
+
 
 function startApp() {
     fetchContainer();
 }
 
 const fetchContainer = async () => {
-    const url = `https://amazing-events.herokuapp.com/api/events`;
+    try {
+        const url = `https://amazing-events.herokuapp.com/api/events`;
+        const request = await fetch(url);
+        const json = await request.json();
+        const arrayInfo = json.events;
+        fecha = json.currentDate;
 
-    const request = await fetch(url);
-    const json = await request.json();
-    const arrayInfo = json.events;
-    const currentDate = json.currentDate;
+        controlador(arrayInfo);
 
-    controlador(arrayInfo, currentDate);
+    } catch (error) {
+        console.error(error);
+    }
+
 }
 
-const controlador = (info, currentDate) => {
-    filtroCategory(info, currentDate);
-}
-
-const filtroCategory = (obj, currentDate) => {
-
-    fecha = currentDate;
-
-    filtraInfo(obj);
-    filtroUpcomingPast(obj)
+const controlador = (info) => {
+    filtraInfo(info);
+    filtroUpcomingPast(info);
 }
 
 function filtraInfo(obj) {
@@ -76,8 +70,7 @@ const mostrarValores = (obj) => {
     parrafo.className = "py-2 px-5 bg-dark text-light container my-1";
     obj.forEach(element => {
 
-        const { name, capacity, asistencia, image, valor } = element;
-
+        const { name, asistencia, image, valor } = element;
 
         const texto = document.createElement('td');
         texto.className = "m-0"
@@ -118,19 +111,13 @@ const filtrarUpcomimg = (info) => {
 
         acc[value.category] = acc[value.category] || {
             categoria: value.category,
-            valorFinal: 0,
             valorEstimado: 0,
-            capacidad: 0,
-            estimado: 0,
             porcentage: 0,
             longitud: 0
         };
 
         //Sumas el respectivo valor
-        acc[value.category].valorFinal += value.price * value.capacity;
         acc[value.category].valorEstimado += value.price * value.estimate;
-        acc[value.category].capacidad += parseInt(value.capacity);
-        acc[value.category].estimado += parseInt(value.estimate);
         acc[value.category].porcentage += (100 * parseInt(value.estimate) / parseInt(value.capacity))
         acc[value.category].longitud += 1 * 100
         return acc; //retornas el nuevo acumulado
@@ -144,10 +131,7 @@ const filtrarPast = (info) => {
 
         acc[value.category] = acc[value.category] || {
             categoria: value.category,
-            valorFinal: 0,
             valorEstimado: 0,
-            capacidad: 0,
-            asistencia: 0,
             porcentage: 0,
             longitud: 0,
             date: value.date
@@ -155,10 +139,7 @@ const filtrarPast = (info) => {
         };
 
         //Sumas el respectivo valor
-        acc[value.category].valorFinal += value.price * value.capacity;
         acc[value.category].valorEstimado += value.price * parseInt(value.assistance);
-        acc[value.category].capacidad += parseInt(value.capacity);
-        acc[value.category].asistencia += parseInt(value.assistance);
         acc[value.category].porcentage += (100 * parseInt(value.assistance) / parseInt(value.capacity))
         acc[value.category].longitud += 1 * 100
         return acc; //retornas el nuevo acumulado
@@ -177,7 +158,7 @@ const mostrarTabla = (obj) => {
             <tr>
                 <th scope="row">${date > fecha ? categoria : categoria}</th>
                 <td>$${date > fecha ? valorEstimado.toLocaleString() : valorEstimado.toLocaleString()}</td>
-                <td>${valorEstimado.toLocaleString() ?  valor : valor}%</td>
+                <td>${valorEstimado.toLocaleString() ? valor : valor}%</td>
                 </tr>
                 `;
         if (fecha > date) {
@@ -187,5 +168,4 @@ const mostrarTabla = (obj) => {
         }
 
     });
-
 }
