@@ -14,8 +14,10 @@
     <title>Past Event</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Roboto+Condensed:wght@300;400;700&display=swap"
+        rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/eadeaa3284.js" crossorigin="anonymous"></script>
 
@@ -58,116 +60,49 @@
             </div>
         </nav>
     </header>
-    <!-- Main -->
-    <main class="flex-auto container-md p-0">
-		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active position-relative">
-					<img src="../img/cartelera de cine.jpg" class="d-block viewportCarousel border border-2 border-dark"
-						alt="jurasicc word">
-				</div>
-				<div class="carousel-item">
-					<img src="../img/cartelera 2.jpg" class="d-block viewportCarousel border border-2 border-dark"
-						alt="Event Sport">
-				</div>
-				<div class="carousel-item">
-					<img src="../img/cartelera 3.jpg" class="d-block viewportCarousel border border-2 border-dark" alt="...">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-				data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-				data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-        <h1 class="text-light fs-1 fw-bold text-uppercase text-center p-3 mt-4">Stats</h1>
-	</main>
-    <!-- Formulario -->
-    <section class="container-sm container-fluid py-5 flex-auto1">
-        <table class="table">
+    <!-- Root dinamico -->
+    <section class="container mt-3">
+        <table>
             <thead>
-                <h2 class="text-light">Events statistics</h2>
+                <h2>Event Statistics</h2>
                 <tr>
-                    <th>Events with the highest percentage of atlendance</th>
-                    <th>Events with the lowest percentage of atlendance</th>
+                    <th>Events with lowest percentage of attendance</th>
+                    <th>Events with heighest percentage of attendance</th>
                     <th>Event with larger capacity</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
+            <tbody id="root3">
+
             </tbody>
         </table>
-        <table class="table">
+    </section>
+    <section class="container mt-3">
+        <table>
             <thead>
-                <h2 class="text-light">Upcoming events statics by category</h2>
+                <h2>Upcoming Event</h2>
                 <tr>
-                    <th>Categories</th>
+                    <th>Category</th>
                     <th>Revenues</th>
-                    <th>Percentage of attendance</th>
+                    <th>Percentage of assistance</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
+            <tbody id="root">
+
             </tbody>
         </table>
-        <table class="table">
+    </section>
+    <section class="container mt-3 mb-3">
+        <table>
             <thead>
-                <h2 class="text-light">Past Events Statistic by category</h2>
+                <h2>Past Event</h2>
                 <tr>
-                    <th>Categories</th>
+                    <th>Category</th>
                     <th>Revenues</th>
-                    <th>Percentage of attendance</th>
+                    <th>Percentage of assistance</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
-                <tr>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                    <td>Empty</td>
-                </tr>
+            <tbody id="pastEvent">
+
             </tbody>
         </table>
     </section>
@@ -183,6 +118,8 @@
             <h2 class="text-light">Cohort</h2>
         </section>
     </footer>
+
+    <script src="../js/stats.js"></script>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

@@ -1,18 +1,27 @@
-import { data } from "./data.js"
-
 let cadenaParametrosUrl = location.search;
 let parametros = new URLSearchParams(cadenaParametrosUrl)
 let id = parametros.get('id');
-const info = data.events;
 const containerDiv = document.querySelector('.container-card');
 const containerTitle = document.querySelector('.title');
 
-const encontrarAgente = (info) =>{
+const fetchContainer = async () => {
+    const url = `https://amazing-events.herokuapp.com/api/events`;
+
+    const request = await fetch(url);
+    const json = await request.json();
+    const arrayInfo = json.events;
+    const currentDate = json.currentDate;
+
+    encontrarAgente(arrayInfo, currentDate);
+}
+
+const encontrarAgente = (info, currentDate) =>{
     const resultado = info.find(agente => agente._id == id);
 
-    imprimirData(resultado);
+    imprimirData(resultado, currentDate);
 }
-const imprimirData = (info) =>{
+
+const imprimirData = (info, currentDate) =>{
     const {image, date, description, name, category, capacity, price, assistance } = info;
 
     containerTitle.innerHTML = name;
@@ -34,7 +43,7 @@ const imprimirData = (info) =>{
             </div>
             <p class="fw-bold mt-2">${capacity - assistance > 0?`<span><i class="fa-solid fa-ticket text-warning"></i> ${capacity-assistance} Available</span>`:"Tickets sold out"}</p>
 
-            <p class="px-5 py-3 bg-dark mt-4 text-light">${data.currentDate > date?"Past":"Comming"}: <span class="fw-bold">${date}</span></p>
+            <p class="px-5 py-3 bg-dark mt-4 text-light">${currentDate > date?"Past":"Comming"}: <span class="fw-bold">${date}</span></p>
 
             <p class="fw-bold text-primary mt-5">Category: <span class="text-dark">${category}</span></p>
         </div>
@@ -43,4 +52,4 @@ const imprimirData = (info) =>{
 
 }
 
-encontrarAgente(info);
+fetchContainer();

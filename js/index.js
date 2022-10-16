@@ -1,12 +1,8 @@
-import { data } from "./data.js";
-
 document.addEventListener("DOMContentLoaded", inciarApp);
 
 function inciarApp() {
     // Como primer Instrucción renderiza la cards, check
-    mostrarHTML(info);
-    dropCategory(info);
-    mostrarCheckbox(reducirCategoria(categoycard));
+    sincrono()
 
     // Declarando
     searchType.addEventListener("keyup", filtrarInput);
@@ -19,9 +15,22 @@ const upcomingEvents = document.querySelector('.upcomingEvents');
 const pastEvent = document.querySelector('.pastEvent');
 const checkbox = document.querySelector('#checkbox');
 const searchType = document.querySelector("#searchInput");
+let currentDate;
+let informacion;
 
 // Data de los objetos
-const info = data.events;
+const sincrono = async () => {
+    const url = `https://amazing-events.herokuapp.com/api/events`;
+
+    const request = await fetch(url);
+    const json = await request.json();
+    const arrayInfo = json.events;
+    const currentDate = json.currentDate;
+    mostrarHTML(arrayInfo, currentDate);
+    dropCategory(arrayInfo);
+    mostrarCheckbox(reducirCategoria(categoycard));
+    controlador(arrayInfo, currentDate);
+}
 
 // Data de los nombres de las categoy
 const categoycard = [];
@@ -80,7 +89,6 @@ const cheq = (info) => {
     const check = [...inputCheck, inputCheck];
     const trueCheck = check.filter(inputCheck => inputCheck.checked);
     const valueCheck = trueCheck.map(check => check.value)
-
     let filtrados = [];
 
     info.filter(eventos => {
@@ -111,16 +119,23 @@ const search = (info) => {
     return resultado;
 }
 
+// Controlador de eventos
+const controlador = (info, data) => {
+    currentDate = data
+    informacion = info;
+}
+
 // Super Filtro
 const filtrarInput = () => {
-    let eventFilter2 = cheq(info)
+    let eventFilter2 = cheq(informacion);
     let eventFilter = search(eventFilter2)
 
-    mostrarHTML(eventFilter)
+    mostrarHTML(eventFilter, currentDate);
+
 }
 
 // Renderizo la data --> (cards)
-const mostrarHTML = (informacion) => {
+const mostrarHTML = (informacion, currentDate) => {
 
     limpiarHTML();
 
@@ -144,9 +159,9 @@ const mostrarHTML = (informacion) => {
                     </div>
                     <i class="fa-solid fa-user text-primary"> ${capacity}</i>
                 </div>
-                <a target="_blank" href="${indexCard !== null ? "./html" : "."}/buy.html?id=${_id}" class="${data.currentDate > date ? "pastDisable" : ""} effectBuy rounded-pill d-block btn mt-4 btn-success fw-bold text-uppercase">Buy <i class="ms-2 fa-solid fa-arrow-right"></i></a>
+                <a target="_blank" href="${indexCard !== null ? "./html" : "."}/buy.html?id=${_id}" class="${currentDate > date ? "pastDisable" : ""} effectBuy rounded-pill d-block btn mt-4 btn-success fw-bold text-uppercase">Buy <i class="ms-2 fa-solid fa-arrow-right"></i></a>
                 <a target="_blank" href="${indexCard !== null ? "./html" : "."}/details.html?id=${_id}" class="effectBuy rounded-pill d-block btn mt-4 btn-primary fw-bold text-uppercase">More info <i class="ms-2 fa-solid fa-arrow-right"></i></a>
-                <p class="px-5 py-3 bg-dark mt-4 text-light">${data.currentDate > date ? "Past" : "Comming"}: <span class="fw-bold">${date}</span></p>
+                <p class="px-5 py-3 bg-dark mt-4 text-light">${currentDate > date ? "Past" : "Comming"}: <span class="fw-bold">${date}</span></p>
             </div>
         `
 
@@ -155,12 +170,12 @@ const mostrarHTML = (informacion) => {
             indexCard.appendChild(divContainer);
         } else if (upcomingEvents !== null) {
 
-            if (date > data.currentDate) {
+            if (date > currentDate) {
                 upcomingEvents.appendChild(divContainer);
             }
         } else if (pastEvent !== null) {
 
-            if (date < data.currentDate) {
+            if (date < currentDate) {
                 pastEvent.appendChild(divContainer);
             }
         } else {
